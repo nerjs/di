@@ -2,13 +2,13 @@
     "compilerOptions": {
       "target": "ES2018",
       "module": "CommonJS",
-      "types": ["node"],
+      "types": ["node", "reflect-metadata"],
       "lib": ["es6", "es2017", "esnext.asynciterable"],
       "skipLibCheck": true,
       "sourceMap": true,
       "outDir": "./dist",
       "moduleResolution": "node",
-      "removeComments": true,
+      "removeComments": false,
       "noImplicitAny": true,
       "strictNullChecks": true,
       "strictFunctionTypes": true,
@@ -27,8 +27,7 @@
       "strict": true,
       "forceConsistentCasingInFileNames": true,
       "isolatedModules": false,
-      "noEmit": true,
-      "jsx": "react-jsx",
+      "noEmit": false,
       "strictPropertyInitialization": false
     },
     "exclude": [
