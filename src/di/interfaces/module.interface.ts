@@ -7,37 +7,41 @@ export interface DynamicModule extends ModuleMetadata {
   global?: boolean
 }
 
-export interface ForwardReference {
-  forwardRef: Type<any>
+export interface LazyModule {
+  lazy: () => MaybePromise<Type<any>>
 }
 
-interface OptionalModuleSync {
+interface OptionalStaticModuleSync {
   module: Type<any>
   predicate: boolean
 }
 
-interface OptionalLazySync {
-  lazy: () => MaybePromise<Type<any>>
-  predicate: boolean
-}
-
-interface OptionalModuleFactory {
+interface OptionalStaticModuleFactory {
   module: Type<any>
   predicate: (...args: any[]) => MaybePromise<boolean>
   inject: InjectFactoryToken[]
 }
 
-interface OptionalLazyFactory {
-  lazy: () => MaybePromise<Type<any>>
+export type OptionalModuleSync = OptionalStaticModuleSync | OptionalStaticModuleFactory
+
+interface OptionalLazyModuleSync extends LazyModule {
+  predicate: boolean
+}
+
+interface OptionalLazyModuleFactory extends LazyModule {
   predicate: (...args: any[]) => MaybePromise<boolean>
   inject: InjectFactoryToken[]
 }
 
-export type OptionalModule = OptionalModuleSync | OptionalModuleFactory | OptionalLazySync | OptionalLazyFactory
+export type OptionalModuleLazy = OptionalLazyModuleSync | OptionalLazyModuleFactory
+
+export type OptionalModule = OptionalModuleSync | OptionalModuleLazy
+
+export type TypeModule = Type<any> | DynamicModule | OptionalModule | LazyModule
 
 export interface ModuleMetadata {
-  imports?: (Type<any> | DynamicModule | Promise<DynamicModule> | ForwardReference | OptionalModule)[]
-  controllers?: Type<any>[]
+  imports?: Array<TypeModule>
   providers?: Provider[]
   exports?: InjectionToken[]
+  global?: boolean
 }

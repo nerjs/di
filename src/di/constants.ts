@@ -12,3 +12,15 @@ export enum MODULE_METADATA {
   CONTROLLERS = 'controllers',
   EXPORTS = 'exports',
 }
+
+export const SOURCE_HOOK = 'source:hook'
+export enum SOURCE_HOOKS {
+  CREATED = 'created',
+  BEFORE_INIT = 'before_init',
+  INIT = 'init',
+  AFTER_INIT = 'after_init',
+  LISTEN = 'listen',
+  BOOTSTRAP = 'bootstrap',
+}
+
+export const GLOBAL_MODULE = 'global:module'

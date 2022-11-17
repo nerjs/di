@@ -1,6 +1,6 @@
-export interface Type<T = any> extends Function {
-  new (...args: any[]): T
-}
+import { ClassType } from '../helpers/types.helper'
+
+export type Type<T = any> = ClassType<T>
 
 export enum Scope {
   GLOBAL,
