@@ -1,6 +1,10 @@
-import { ClassType } from '../helpers/types.helper'
+export interface ClassType<T = any> extends Function {
+  new (...args: any[]): T
+}
 
-export type Type<T = any> = ClassType<T>
+export interface Instance {
+  constructor: Function
+}
 
 export enum Scope {
   GLOBAL,
@@ -9,11 +13,7 @@ export enum Scope {
   REQUEST,
 }
 
-export interface Abstract<T> extends Function {
-  prototype: T
-}
-
-export type InjectionToken = string | symbol | Type<any> | Abstract<any> | Function
+export type InjectionToken = string | symbol | ClassType<any>
 
 export type OptionalFactoryDependency = {
   token: InjectionToken

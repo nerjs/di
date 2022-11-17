@@ -1,47 +1,50 @@
-import { MaybePromise } from '../helpers/types.helper'
-import { Provider } from './provider.interface'
-import { InjectFactoryToken, InjectionToken, Type } from './type.interface'
-
-export interface DynamicModule extends ModuleMetadata {
-  module: Type<any>
-  global?: boolean
-}
-
-export interface LazyModule {
-  lazy: () => MaybePromise<Type<any>>
-}
-
-interface OptionalStaticModuleSync {
-  module: Type<any>
-  predicate: boolean
-}
-
-interface OptionalStaticModuleFactory {
-  module: Type<any>
-  predicate: (...args: any[]) => MaybePromise<boolean>
-  inject: InjectFactoryToken[]
-}
-
-export type OptionalModuleSync = OptionalStaticModuleSync | OptionalStaticModuleFactory
-
-interface OptionalLazyModuleSync extends LazyModule {
-  predicate: boolean
-}
-
-interface OptionalLazyModuleFactory extends LazyModule {
-  predicate: (...args: any[]) => MaybePromise<boolean>
-  inject: InjectFactoryToken[]
-}
-
-export type OptionalModuleLazy = OptionalLazyModuleSync | OptionalLazyModuleFactory
-
-export type OptionalModule = OptionalModuleSync | OptionalModuleLazy
-
-export type TypeModule = Type<any> | DynamicModule | OptionalModule | LazyModule
+import { MaybePromise, MaybePromiseLike } from '../helpers/types.helper'
+import { IProvider } from './provider.interface'
+import { ClassType, InjectFactoryToken, InjectionToken } from './type.interface'
 
 export interface ModuleMetadata {
-  imports?: Array<TypeModule>
-  providers?: Provider[]
+  imports?: MaybePromiseLike<IModule>[]
+  providers?: MaybePromiseLike<IProvider>[]
   exports?: InjectionToken[]
   global?: boolean
 }
+
+export interface DynamicModule extends ModuleMetadata {
+  module: ClassType
+  global?: boolean
+}
+
+export interface PresentModule {
+  module: ClassType
+  [key: string]: any
+}
+
+export type ReadyModule = ClassType | DynamicModule
+
+export interface LazyModule {
+  lazy: () => MaybePromise<ReadyModule>
+}
+
+export interface OptionalStaticModuleSync {
+  module: ClassType
+  predicate: boolean
+}
+
+export interface OptionalStaticModuleFactory {
+  module: ClassType
+  predicate: (...args: any[]) => MaybePromise<boolean>
+  inject?: InjectFactoryToken[]
+}
+
+export interface OptionalLazyModuleSync extends LazyModule {
+  predicate: boolean
+}
+
+export interface OptionalLazyModuleFactory extends LazyModule {
+  predicate: (...args: any[]) => MaybePromise<boolean>
+  inject?: InjectFactoryToken[]
+}
+
+export type OptionalModule = OptionalStaticModuleSync | OptionalStaticModuleFactory | OptionalLazyModuleSync | OptionalLazyModuleFactory
+
+export type IModule = ClassType | DynamicModule | OptionalModule | LazyModule
