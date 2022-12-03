@@ -7,6 +7,7 @@ export interface PartialModule {
   providers: IProvider[]
   exports?: Token[]
   global?: boolean
+  run?: Token
 }
 
 export interface FullModule extends PartialModule {
@@ -33,6 +34,10 @@ export interface LazyModule {
 
 export interface OptionalLazyModule extends LazyModule {
   predicate: boolean | ((...injecs: any[]) => MaybePromise<boolean>)
+}
+
+export type OptionalPredicatedModule = (OptionalModule | OptionalLazyModule) & {
+  predicate: (...injecs: any[]) => MaybePromise<boolean>
 }
 
 export type IModule =

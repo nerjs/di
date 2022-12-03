@@ -1,0 +1,6 @@
+export const MODULE = Symbol('module')
+export const PROVIDER = Symbol('provider')
+export const IMPORTS = Symbol('imports')
+export const PROVIDERS = Symbol('providers')
+export const EXPORTS = Symbol('exports')
+export const GLOBAL = Symbol('global')

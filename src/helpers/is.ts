@@ -1,4 +1,4 @@
-import { ClassType, Instance, Token } from './types.helper'
+import { Alias, ClassType, Instance, Token, Tokenized } from './types.helper'
 
 export const isString = (str: any): str is string => typeof str === 'string'
 export const isSymbol = (sym: any): sym is symbol => typeof sym === 'symbol'
@@ -15,3 +15,5 @@ export const isStringToken = (token: any): token is string => isString(token)
 export const isSymbolToken = (token: any): token is symbol => isSymbol(token)
 export const isClassTypeToken = (token: any): token is ClassType => isClassType(token)
 export const isToken = (token: any): token is Token => isStringToken(token) || isSymbolToken(token) || isClassTypeToken(token)
+export const isTokenized = (obj: any): obj is Tokenized => isObject(obj) && 'token' in obj && isToken(obj.token)
+export const isAlias = (obj: any): obj is Alias => isTokenized(obj) && 'alias' in obj && isToken(obj.alias)
