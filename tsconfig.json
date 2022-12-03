@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-      "target": "ES2018",
+      "target": "ES6",
       "module": "CommonJS",
       "types": ["node", "reflect-metadata"],
-      "lib": ["es6", "es2017", "esnext.asynciterable"],
+      "lib": ["es6", "es2022", "esnext.asynciterable"],
       "skipLibCheck": true,
       "sourceMap": true,
       "outDir": "./dist",
@@ -22,12 +22,13 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "resolveJsonModule": true,
-      "baseUrl": ".",
+      "baseUrl": "./",
       "allowJs": true,
       "strict": true,
       "forceConsistentCasingInFileNames": true,
       "isolatedModules": false,
       "noEmit": false,
+      "noEmitOnError": true,
       "strictPropertyInitialization": false
     },
     "exclude": [

@@ -19,9 +19,7 @@
     "test": "echo \"The tests are not ready yet. Tests will come soon\""
   },
   "devDependencies": {
-    "@types/node": "18.7.14",
     "@types/reflect-metadata": "0.1.0",
-    "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.36.1",
     "@typescript-eslint/parser": "5.36.1",
     "eslint": "^8.23.0",
@@ -39,6 +37,7 @@
     "template"
   ],
   "dependencies": {
+    "@types/node": "18.11.10",
     "reflect-metadata": "0.1.13",
     "uuid": "9.0.0"
   }
