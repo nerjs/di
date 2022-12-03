@@ -14,8 +14,8 @@
     "clear": "rm -rf dist",
     "build": "npm run clear && tsc",
     "watch": "tsc --watch",
-    "start": "nodemon ./dist",
-    "start:prod": "node ./dist",
+    "start": "nodemon --enable-source-maps ./dist",
+    "start:prod": "node --enable-source-maps ./dist",
     "test": "echo \"The tests are not ready yet. Tests will come soon\""
   },
   "devDependencies": {
