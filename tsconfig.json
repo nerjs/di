@@ -29,7 +29,7 @@
       "forceConsistentCasingInFileNames": true,
       "isolatedModules": false,
       "noEmit": false,
-      "noEmitOnError": true,
+      "noEmitOnError": false,
       "strictPropertyInitialization": false
     },
     "exclude": [

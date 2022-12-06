@@ -14,11 +14,21 @@ export type Token = string | symbol | InjectableClassType
 
 export interface Tokenized {
   token: Token
-  [key: string | symbol]: any
 }
 
-export interface Alias extends Pick<Tokenized, 'token'> {
+export interface Alias extends Tokenized {
   alias: Token
+}
+
+export interface RefInject {
+  ref: () => MaybePromise<Token>
+}
+
+export type InjectToken = RefInject | Token
+
+export interface IInjector {
+  get<T = any>(token: Token, parent?: Token): MaybePromise<T>
+  getAll<T extends any[] = any[]>(tokens: Token[], parent?: Token): PromiseLike<T>
 }
 
 export enum Hooks {
@@ -26,4 +36,7 @@ export enum Hooks {
   INIT = 'init',
   INITED = 'inited',
   BOOTSTRAP = 'bootstrap',
+  DESTROY = 'destroy',
+  BEFORE_SHUTDOWN = 'before_shutdown',
+  SHUTDOWN = 'shutdown',
 }

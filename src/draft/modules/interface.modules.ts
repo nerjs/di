@@ -1,4 +1,4 @@
-import { InjectableClassType, MaybePromise, Token } from '../helpers/types.helper'
+import { Alias, InjectableClassType, MaybePromise, Token } from '../helpers/types.helper'
 import { IProvider } from '../provider/interface.provider'
 
 export interface PartialModule {
@@ -48,3 +48,4 @@ export type IModule =
   | OptionalModule
   | LazyModule
   | OptionalLazyModule
+  | Alias
