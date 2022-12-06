@@ -1,8 +1,10 @@
-import { Alias, ClassType, MaybePromise, Token, Tokenized } from '../helpers/types.helper'
+import { Alias, ClassType, MaybePromise, Token, Tokenized } from '../utils/types'
 
 export enum ProviderScope {
   GLOBAL,
   MODULE,
+  PROVIDER,
+  INSTANCE,
   CALL,
 }
 
@@ -27,22 +29,14 @@ export type ProviderUse<T = any> = ProviderUseValue<T> | ProviderUseFactory<T> |
 
 export type IProvider<T = any> = ClassType<T> | Alias | ProviderUse<T>
 
-export interface INameProvider {
+export interface ProviderId extends Tokenized {
   module: Token
-  token: Token
 }
 
-export interface IProviderStrategy<T = any> {
-  init(): MaybePromise<void>
-  get(name: INameProvider): MaybePromise<T>
+export interface InstanceId extends ProviderId {
+  instance: symbol | string
 }
 
-export interface IProviderContext<T = any> extends IProviderStrategy<T> {
-  scope: ProviderScope
-  inited: boolean
-  name: INameProvider
-}
-
-export interface ProviderScopeInjector {
-  get<T = any>(token: Token): MaybePromise<IProviderContext<T> | undefined>
+export interface CallId extends InstanceId {
+  method: string
 }

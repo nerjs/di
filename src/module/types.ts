@@ -1,5 +1,5 @@
-import { Alias, InjectableClassType, MaybePromise, Token } from '../helpers/types.helper'
-import { IProvider } from '../provider/interface.provider'
+import { IProvider } from '../provider/types'
+import { Alias, ClassType, MaybePromise, Token } from '../utils/types'
 
 export interface PartialModule {
   token?: Token
@@ -40,12 +40,4 @@ export type OptionalPredicatedModule = (OptionalModule | OptionalLazyModule) & {
   predicate: (...injecs: any[]) => MaybePromise<boolean>
 }
 
-export type IModule =
-  | InjectableClassType
-  | PartialModule
-  | FullModule
-  | OptionalFullModule
-  | OptionalModule
-  | LazyModule
-  | OptionalLazyModule
-  | Alias
+export type IModule = ClassType | PartialModule | FullModule | OptionalFullModule | OptionalModule | LazyModule | OptionalLazyModule | Alias

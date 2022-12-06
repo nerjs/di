@@ -5,3 +5,21 @@ export interface ClassType<T = any> {
   new (...args: any[]): T
 }
 export type Instance<T = any> = T & { constructor: ClassType<T> }
+
+export type Noop = (...args: any[]) => MaybePromise<any>
+
+export type Token = string | symbol | ClassType
+
+export interface Tokenized {
+  token: Token
+}
+
+export interface Alias extends Tokenized {
+  alias: Token
+}
+
+export interface RefInject {
+  ref: () => MaybePromise<Token>
+}
+
+export type InjectToken = RefInject | Token
