@@ -22,4 +22,8 @@ export interface RefInject {
   ref: () => MaybePromise<Token>
 }
 
-export type InjectToken = RefInject | Token
+export type OptionalInject = {
+  optional: true
+} & (Tokenized | RefInject)
+
+export type InjectToken = RefInject | Token | OptionalInject
