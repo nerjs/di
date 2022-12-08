@@ -22,7 +22,9 @@ export class List<I extends ListItem> {
   }
 
   get(token: Token) {
-    return this.items.get(token)
+    const item = this.items.get(token)
+    if (!item) throw new EngineError(`Item ${tokenToString(token)} not found`)
+    return item
   }
 
   clear() {
