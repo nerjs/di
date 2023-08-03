@@ -1,4 +1,4 @@
-import { Alias, ClassType, InjectToken, Instance, OptionalInject, RefInject, Token, Tokenized } from '../utils/types'
+import { Alias, ClassType, InjectToken, Instance, OptionalInject, RefInject, Token, Tokenized, WithParamsInject } from '../utils/types'
 
 // common data types
 export const isString = (str: any): str is string => typeof str === 'string'
@@ -20,4 +20,5 @@ export const isAlias = (obj: any): obj is Alias => isTokenized<Alias>(obj) && 'a
 export const isRefInject = (token: any): token is RefInject => isObject(token) && 'ref' in token && isFunction(token.ref)
 export const isOptionalInject = (token: any): token is OptionalInject =>
   (isTokenized(token) || isRefInject(token)) && 'optional' in token && !!(token as any).optional
+export const isWithParamsInject = (token: any): token is WithParamsInject => (isTokenized(token) || isRefInject(token)) && 'params' in token
 export const isInjectToken = (token: any): token is InjectToken => isToken(token) || isRefInject(token) || isOptionalInject(token)

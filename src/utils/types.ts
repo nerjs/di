@@ -26,4 +26,8 @@ export type OptionalInject = {
   optional: true
 } & (Tokenized | RefInject)
 
-export type InjectToken = RefInject | Token | OptionalInject
+export type WithParamsInject = {
+  params: any
+} & (OptionalInject | RefInject | Tokenized)
+
+export type InjectToken = RefInject | Token | OptionalInject | WithParamsInject

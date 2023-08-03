@@ -8,6 +8,14 @@ export enum ProviderScope {
   CALL,
 }
 
+export enum ProviderHooks {
+  CREATE = 'create',
+  BEFOREINIT = 'beforeinit',
+  INITED = 'inited',
+  BEFOREDESTROY = 'beforedestroy',
+  DESTROYED = 'destroyed',
+}
+
 export interface ProviderBase extends Tokenized {
   scope?: ProviderScope
 }
@@ -29,14 +37,30 @@ export type ProviderUse<T = any> = ProviderUseValue<T> | ProviderUseFactory<T> |
 
 export type IProvider<T = any> = ClassType<T> | Alias | ProviderUse<T>
 
-export interface ProviderId extends Tokenized {
+export interface IProviderId extends Tokenized {
   module: Token
 }
 
-export interface InstanceId extends ProviderId {
+export interface IInstanceId extends IProviderId {
   instance: symbol | string
 }
 
-export interface CallId extends InstanceId {
+export interface ICallId extends IInstanceId {
   method: string
 }
+
+export interface IPartialContext<V, H extends string = string> {
+  id: IProviderId
+  inited?: boolean
+  needParams?: boolean
+  scope?: ProviderScope
+  get(id: ICallId): MaybePromise<V>
+  callHook?(hook: H, ...args: any[]): MaybePromise<void>
+  init?(): MaybePromise<void>
+  destroy?(reason?: any): MaybePromise<void>
+}
+
+export type IContext<V, H extends string = string> = Required<IPartialContext<V, H>> &
+  Tokenized & {
+    get(id: ICallId | IProviderId | IInstanceId): MaybePromise<V>
+  }

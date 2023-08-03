@@ -1,11 +1,11 @@
 import { isAlias, isClassType, isFunction, isString, isSymbol, isToken, isTokenized } from '../helpers/is'
 import { ClassType } from '../utils/types'
 import {
-  CallId,
-  InstanceId,
+  ICallId,
+  IInstanceId,
   IProvider,
+  IProviderId,
   ProviderBase,
-  ProviderId,
   ProviderUse,
   ProviderUseClass,
   ProviderUseFactory,
@@ -29,10 +29,10 @@ export const isProviderUse = <T = any>(provider: any): provider is ProviderUse<T
 export const isProvider = <T = any>(provider: any): provider is IProvider<T> =>
   isClassType<ClassType<T>>(provider) || isAlias(provider) || isProviderUse<T>(provider)
 
-export const isProviderId = <T extends ProviderId = ProviderId>(id: any): id is T =>
+export const isProviderId = <T extends IProviderId = IProviderId>(id: any): id is T =>
   isTokenized<T>(id) && 'module' in id && isToken(id.module)
 
-export const isInstanceId = <T extends InstanceId = InstanceId>(id: any): id is T =>
+export const isInstanceId = <T extends IInstanceId = IInstanceId>(id: any): id is T =>
   isProviderId<T>(id) && 'instance' in id && (isString(id.instance) || isSymbol(id.instance))
 
-export const isCallId = <T extends CallId = CallId>(id: any): id is T => isInstanceId<T>(id) && 'method' in id && isString(id.method)
+export const isCallId = <T extends ICallId = ICallId>(id: any): id is T => isInstanceId<T>(id) && 'method' in id && isString(id.method)

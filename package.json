@@ -31,8 +31,7 @@
     "jest": "29.3.1",
     "nodemon": "2.0.15",
     "prettier": "2.7.1",
-    "ts-jest": "29.0.3",
-    "typescript": "4.8.2"
+    "ts-jest": "29.0.3"
   },
   "keywords": [
     "ts",
@@ -44,6 +43,7 @@
   "dependencies": {
     "@types/node": "18.11.10",
     "reflect-metadata": "0.1.13",
+    "typescript": "4.9.4",
     "uuid": "9.0.0"
   }
 }
